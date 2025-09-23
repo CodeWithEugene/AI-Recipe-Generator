@@ -1,0 +1,5 @@
+{
+  "name": "Recipe Generator AI",
+  "description": "Generate delicious recipes using the ingredients you already have at home. This application leverages the power of Gemini to create unique and tasty meal ideas based on your available food items.",
+  "requestFramePermissions": []
+}
