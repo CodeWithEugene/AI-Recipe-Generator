@@ -21,50 +21,117 @@ const UserGroupIcon: React.FC = () => (
 
 const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe }) => {
   return (
-    <div className="w-full max-w-4xl bg-white p-6 md:p-10 rounded-2xl shadow-lg border border-gray-200 animate-fade-in">
-      <h1 className="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-2">{recipe.recipeName}</h1>
-      <p className="text-gray-600 text-center mb-8">{recipe.description}</p>
+    <div className="w-full max-w-6xl bg-white/95 backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-2xl border border-orange-100 relative overflow-hidden animate-fade-in hover-lift">
+      {/* Decorative elements */}
+      <div className="absolute top-0 left-0 w-40 h-40 bg-gradient-to-br from-orange-200/20 to-red-200/20 rounded-full -translate-x-20 -translate-y-20"></div>
+      <div className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl from-amber-200/20 to-orange-200/20 rounded-full translate-x-16 translate-y-16"></div>
       
-      <div className="flex flex-wrap justify-center gap-6 md:gap-8 mb-8 border-t border-b border-gray-200 py-6">
-        <div className="flex items-center text-gray-700">
-          <ClockIcon />
-          <div>
-            <span className="font-semibold">Prep Time:</span> {recipe.prepTime}
+      <div className="relative z-10">
+        {/* Recipe Header */}
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-orange-500 to-red-500 rounded-full mb-6 shadow-lg">
+            <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
+            </svg>
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent mb-4">
+            {recipe.recipeName}
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            {recipe.description}
+          </p>
+        </div>
+        
+        {/* Recipe Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-2xl border border-orange-200 text-center">
+            <div className="flex items-center justify-center mb-3">
+              <ClockIcon />
+            </div>
+            <h3 className="font-semibold text-gray-800 mb-1">Prep Time</h3>
+            <p className="text-orange-600 font-medium">{recipe.prepTime}</p>
+          </div>
+          <div className="bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-2xl border border-red-200 text-center">
+            <div className="flex items-center justify-center mb-3">
+              <ClockIcon />
+            </div>
+            <h3 className="font-semibold text-gray-800 mb-1">Cook Time</h3>
+            <p className="text-red-600 font-medium">{recipe.cookTime}</p>
+          </div>
+          <div className="bg-gradient-to-br from-amber-50 to-amber-100 p-6 rounded-2xl border border-amber-200 text-center">
+            <div className="flex items-center justify-center mb-3">
+              <UserGroupIcon />
+            </div>
+            <h3 className="font-semibold text-gray-800 mb-1">Servings</h3>
+            <p className="text-amber-600 font-medium">{recipe.servings}</p>
           </div>
         </div>
-        <div className="flex items-center text-gray-700">
-          <ClockIcon />
-          <div>
-            <span className="font-semibold">Cook Time:</span> {recipe.cookTime}
-          </div>
-        </div>
-        <div className="flex items-center text-gray-700">
-          <UserGroupIcon />
-          <div>
-            <span className="font-semibold">Servings:</span> {recipe.servings}
-          </div>
-        </div>
-      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="md:col-span-1">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4 border-b-2 border-orange-400 pb-2">Ingredients</h2>
-          <ul className="space-y-3 text-gray-700">
-            {recipe.ingredients.map((ing, index) => (
-              <li key={index} className="flex items-start">
-                <span className="text-orange-500 mr-2 mt-1">&#10003;</span>
-                <span><strong>{ing.quantity}</strong> {ing.name}</span>
-              </li>
-            ))}
-          </ul>
+        {/* Recipe Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Ingredients */}
+          <div className="space-y-6">
+            <div className="flex items-center mb-6">
+              <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center mr-4 shadow-lg">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+              </div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+                Ingredients
+              </h2>
+            </div>
+            <div className="bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-2xl border border-orange-200">
+              <ul className="space-y-4">
+                {recipe.ingredients.map((ing, index) => (
+                  <li key={index} className="flex items-start group">
+                    <div className="w-6 h-6 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center mr-4 mt-0.5 shadow-sm group-hover:scale-110 transition-transform duration-200">
+                      <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div className="flex-1">
+                      <span className="font-semibold text-gray-800">{ing.quantity}</span>
+                      <span className="text-gray-700 ml-2">{ing.name}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Instructions */}
+          <div className="space-y-6">
+            <div className="flex items-center mb-6">
+              <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center mr-4 shadow-lg">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
+                Instructions
+              </h2>
+            </div>
+            <div className="bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-2xl border border-red-200">
+              <ol className="space-y-6">
+                {recipe.instructions.map((step, index) => (
+                  <li key={index} className="flex items-start group">
+                    <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center mr-4 mt-1 shadow-sm group-hover:scale-110 transition-transform duration-200 flex-shrink-0">
+                      <span className="text-white font-bold text-sm">{index + 1}</span>
+                    </div>
+                    <p className="text-gray-700 leading-relaxed pt-1">{step}</p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
         </div>
-        <div className="md:col-span-2">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4 border-b-2 border-orange-400 pb-2">Instructions</h2>
-          <ol className="space-y-4 text-gray-700 list-decimal list-inside">
-            {recipe.instructions.map((step, index) => (
-              <li key={index} className="leading-relaxed">{step}</li>
-            ))}
-          </ol>
+
+        {/* Footer */}
+        <div className="mt-12 pt-8 border-t border-orange-200 text-center">
+          <p className="text-gray-500 text-sm">
+            🍽️ Bon appétit! Enjoy your culinary creation
+          </p>
         </div>
       </div>
     </div>

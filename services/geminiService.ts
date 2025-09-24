@@ -2,7 +2,12 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { Recipe } from '../types';
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY;
+if (!apiKey) {
+  console.warn('GEMINI_API_KEY not found in environment variables. Please set it in your .env file.');
+}
+
+const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
 const RECIPE_SCHEMA = {
   type: Type.OBJECT,
@@ -66,6 +71,10 @@ const RECIPE_SCHEMA = {
 };
 
 export const generateRecipe = async (ingredientsList: string): Promise<Recipe> => {
+  if (!ai) {
+    throw new Error('Gemini API key not configured. Please set GEMINI_API_KEY in your environment variables.');
+  }
+
   const prompt = `You are an expert chef. Create a creative and delicious recipe using primarily the following ingredients: ${ingredientsList}. You can assume common pantry staples like salt, pepper, water, and basic cooking oil are available. Focus on using the provided ingredients as the main components. Please provide the recipe in JSON format.`;
 
   try {
