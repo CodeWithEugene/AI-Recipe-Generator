@@ -43,20 +43,20 @@ const App: React.FC = () => {
         }}></div>
       </div>
 
-      <div className="relative z-10 flex flex-col items-center p-4 md:p-8">
+      <div className="relative z-10 flex flex-col items-center p-3 md:p-8">
         {/* Header */}
         <header className="text-center mb-8 md:mb-12 max-w-4xl">
-          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-orange-600 via-red-600 to-orange-600 bg-clip-text text-transparent mb-4">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-orange-600 via-red-600 to-orange-600 bg-clip-text text-transparent mb-4">
             Culinary AI
           </h1>
-          <p className="text-xl md:text-2xl text-gray-700 font-medium mb-2">Your Professional Kitchen Assistant</p>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl lg:text-2xl text-gray-700 font-medium mb-2">Your Professional Kitchen Assistant</p>
+          <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto">
             Transform your ingredients into extraordinary dishes with the power of artificial intelligence
           </p>
         </header>
         
         {/* Main Content */}
-        <main className="w-full max-w-6xl flex flex-col items-center gap-8">
+        <main className="w-full max-w-6xl flex flex-col items-center gap-6 md:gap-8">
           <IngredientInput
             ingredients={ingredients}
             setIngredients={setIngredients}
